@@ -6,22 +6,12 @@ class Page1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-          RaisedButton(
-            child: Text('Page 1'),
-            onPressed: () {
-              Navigator.of(context).push(_createRoute());
-            },
-          ),
-          RaisedButton(
-            child: Text('Page 2'),
-            onPressed: () {
-              Navigator.of(context).push(_createRoute());
-            },
-          ),
-        ]),
+        child: RaisedButton(
+          child: Text('Go!'),
+          onPressed: () {
+            Navigator.of(context).push(_createRoute());
+          },
+        ),
       ),
     );
   }
