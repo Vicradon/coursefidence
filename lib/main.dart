@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+void main() => runApp(Page1());
 
 class Page1 extends StatelessWidget {
   Widget build(BuildContext context) {
