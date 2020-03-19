@@ -9,8 +9,24 @@ class Courses extends StatelessWidget {
       ),
       body: Container(
         alignment: Alignment.center,
-        child: Column(
-          children: <Widget>[],
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text("CSC 201"),
+              trailing: Text("89%"),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("CSC 203"),
+              trailing: Text("59%"),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("CSC 205"),
+              trailing: Text("63%"),
+            ),
+            Divider(),
+          ],
         ),
       ),
       floatingActionButton: Fab(),
@@ -26,21 +42,7 @@ class Fab extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           builder: (BuildContext context) {
-            return Container(child: CourseForm()
-                // Wrap(
-                //   children: <Widget>[
-                //     ListTile(
-                //         leading: Icon(Icons.music_note),
-                //         title: Text('Music'),
-                //         onTap: () => {}),
-                //     ListTile(
-                //       leading: Icon(Icons.videocam),
-                //       title: Text('Video'),
-                //       onTap: () => {},
-                //     ),
-                //   ],
-                // ),
-                );
+            return Container(child: CourseForm());
           },
         );
       },
@@ -64,9 +66,13 @@ class CourseFormState extends State<CourseForm> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+        height: 400,
+        // clipBehavior: Clip.round,
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: Column(
+          
           children: <Widget>[
+            Text("Add course", style: TextStyle(fontSize:25),),
             TextFormField(
               decoration: const InputDecoration(
                 icon: Icon(Icons.book),
@@ -94,7 +100,8 @@ class CourseFormState extends State<CourseForm> {
               },
             ),
             // ConfidenceRangeSlide(),
-            
+            SizedBox(height:30),
+
             RaisedButton(
               onPressed: () {
                 if (_formKey.currentState.validate()) {
