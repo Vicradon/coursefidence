@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 
 class Courses extends StatelessWidget {
+  _openCourseMenu(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: ListView(children: <Widget>[
+            ListTile(
+              title: Row(
+                children: <Widget>[Icon(Icons.edit), Text("Edit")],
+              ),
+            ),
+            ListTile(
+              title: Row(
+                children: <Widget>[Icon(Icons.delete), Text("Delete")],
+              ),
+            ),
+          ]),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +41,7 @@ class Courses extends StatelessWidget {
             ListTile(
               title: Text("CSC 203"),
               trailing: Text("59%"),
+              onTap: _openCourseMenu(context),
             ),
             Divider(),
             ListTile(
@@ -70,9 +93,11 @@ class CourseFormState extends State<CourseForm> {
         // clipBehavior: Clip.round,
         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: Column(
-          
           children: <Widget>[
-            Text("Add course", style: TextStyle(fontSize:25),),
+            Text(
+              "Add course",
+              style: TextStyle(fontSize: 25),
+            ),
             TextFormField(
               decoration: const InputDecoration(
                 icon: Icon(Icons.book),
@@ -100,7 +125,7 @@ class CourseFormState extends State<CourseForm> {
               },
             ),
             // ConfidenceRangeSlide(),
-            SizedBox(height:30),
+            SizedBox(height: 30),
 
             RaisedButton(
               onPressed: () {

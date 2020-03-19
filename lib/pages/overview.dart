@@ -5,44 +5,6 @@ class Overview extends StatelessWidget {
   final courseTextStyle = TextStyle(fontSize: 18, color: Colors.white);
   final confidenceTextStyle = TextStyle(fontSize: 50, color: Colors.white);
 
-  Widget _createDrawerItem(
-      {IconData icon, String text, GestureTapCallback onTap}) {
-    return ListTile(
-      title: Row(
-        children: <Widget>[
-          Icon(icon),
-          Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text(text),
-          )
-        ],
-      ),
-      onTap: onTap,
-    );
-  }
-
-  Widget _createHeader() {
-    return DrawerHeader(
-        margin: EdgeInsets.zero,
-        padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('assets/logo.png'),
-          ),
-        ),
-        child: Stack(children: <Widget>[
-          Positioned(
-              bottom: 12.0,
-              left: 16.0,
-              child: Text("Flutter Step-by-Step",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500))),
-        ]));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,16 +12,27 @@ class Overview extends StatelessWidget {
         title: Text("Overview"),
       ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: <Widget>[
-            _createHeader(),
-            Divider(),
-            Divider(),
-            _createDrawerItem(icon: Icons.bug_report, text: 'Report an issue'),
+            UserAccountsDrawerHeader(
+              accountName: Text("User User"),
+              accountEmail: Text("user@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text("User"),
+              ),
+            ),
             ListTile(
-              title: Text('0.0.1'),
-              onTap: () {},
+              title: Text("Overview"),
+              leading: Icon(Icons.remove_red_eye),
+            ),
+            ListTile(
+              title: Text("Courses"),
+              leading: Icon(Icons.book),
+            ),
+            ListTile(
+              title: Text("About"),
+              leading: Icon(Icons.info),
             ),
           ],
         ),
