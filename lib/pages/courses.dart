@@ -41,7 +41,7 @@ class Courses extends StatelessWidget {
             ListTile(
               title: Text("CSC 203"),
               trailing: Text("59%"),
-              onTap: _openCourseMenu(context),
+              // onTap: _openCourseMenu(context),
             ),
             Divider(),
             ListTile(
@@ -124,9 +124,8 @@ class CourseFormState extends State<CourseForm> {
                 return null;
               },
             ),
-            // ConfidenceRangeSlide(),
+            ConfidenceSlide(),
             SizedBox(height: 30),
-
             RaisedButton(
               onPressed: () {
                 if (_formKey.currentState.validate()) {
@@ -142,36 +141,36 @@ class CourseFormState extends State<CourseForm> {
     );
   }
 }
-/*
-class ConfidenceRangeSlide extends StatefulWidget {
-  @override
-  RangeSlideState createState() => RangeSlideState();
-}
-*/
-/*
-class RangeSlideState extends State<ConfidenceRangeSlide> {
-  RangeValues _values = RangeValues(0.3, 0.7);
 
+class ConfidenceSlide extends StatefulWidget {
+  @override
+  SlideState createState() => SlideState();
+}
+
+class SlideState extends State<ConfidenceSlide> {
+  var _duelCommandment = 0;
   @override
   Widget build(BuildContext context) {
-    return RangeSlider(
-      values: _values,
-      min: 0,
-      max: 100,
-      onChanged: null,
-      divisions: 100,
-      onChangeStart: (RangeValues values) {
-        setState(() {
-          _values = values;
-        });
-      },
-      // onChanged: (RangeValues values) {
-      //   setState(() {
-      //     _values = values;
-      //   });
-      // },
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Text(
+          "Confidence level",
+          style: TextStyle(fontSize: 15, color: Colors.black54),
+        ),
+        Slider(
+          value: _duelCommandment.toDouble(),
+          min: 0,
+          max: 100.0,
+          divisions: 99,
+          label: '$_duelCommandment%',
+          onChanged: (double newValue) {
+            setState(() {
+              _duelCommandment = newValue.round();
+            });
+          },
+        ),
+      ],
     );
   }
 }
-
-*/
