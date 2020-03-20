@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:coursefindence/utils/courseDS.dart';
 
 class Courses extends StatelessWidget {
   _openCourseMenu(context) {
@@ -83,66 +84,104 @@ class CourseForm extends StatefulWidget {
 
 class CourseFormState extends State<CourseForm> {
   final _formKey = GlobalKey<FormState>();
+  // final Map<String, dynamic> courseData = {
+  //   "courseName": null,
+  //   "courseUnits": null,
+  //   "confidenceLevel": null
+  // };
+
+  final courseData = new CourseDS();
+
+  get theCourseData {
+    return courseData;
+  }
+
+  final focusCourseUnits = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Container(
-        height: 400,
-        // clipBehavior: Clip.round,
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-        child: Column(
-          children: <Widget>[
-            Text(
-              "Add course",
-              style: TextStyle(fontSize: 25),
+          height: 400,
+          // clipBehavior: Clip.round,
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          child: SingleChildScrollView(
+            child: Stack(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Text(
+                      "Add course",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.book),
+                        hintText: 'Course Name',
+                        labelText: 'Name *',
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter the course name';
+                        }
+                        return null;
+                      },
+                      onSaved: (String value) {
+                        courseData.courseName = value;
+                      },
+                      onFieldSubmitted: (v){
+                        FocusScope.of(context).requestFocus(focusCourseUnits);
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.confirmation_number),
+                        hintText: 'Course Units',
+                        labelText: 'Units *',
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter the course unit';
+                        }
+                        return null;
+                      },
+                      onSaved: (String value) {
+                        courseData.courseUnits = value;
+                      },
+                      focusNode: focusCourseUnits,
+                    ),
+                    ConfidenceSlide(),
+                    SizedBox(height: 30),
+                    Builder(
+                      builder: (BuildContext context) {
+                        return RaisedButton(
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                              _formKey.currentState.save();
+
+                              print(courseData);
+                              
+                              // Scaffold.of(context).showSnackBar(
+                              //     SnackBar(content: Text('Processing Data')));
+                            }
+                          },
+                          child: Text('Submit'),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                icon: Icon(Icons.book),
-                hintText: 'Course Name',
-                labelText: 'Name *',
-              ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter the course name';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                icon: Icon(Icons.confirmation_number),
-                hintText: 'Course Units',
-                labelText: 'Units *',
-              ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter the course unit';
-                }
-                return null;
-              },
-            ),
-            ConfidenceSlide(),
-            SizedBox(height: 30),
-            RaisedButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 }
 
 class ConfidenceSlide extends StatefulWidget {
+  Map courseData;
+  ConfidenceSlide({this.courseData});
   @override
   SlideState createState() => SlideState();
 }
@@ -158,7 +197,7 @@ class SlideState extends State<ConfidenceSlide> {
           "Confidence level",
           style: TextStyle(fontSize: 15, color: Colors.black54),
         ),
-        Slider(
+        Slider.adaptive(
           value: _duelCommandment.toDouble(),
           min: 0,
           max: 100.0,
@@ -166,7 +205,9 @@ class SlideState extends State<ConfidenceSlide> {
           label: '$_duelCommandment%',
           onChanged: (double newValue) {
             setState(() {
+              print(widget.courseData);
               _duelCommandment = newValue.round();
+
             });
           },
         ),

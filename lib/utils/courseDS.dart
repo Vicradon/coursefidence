@@ -1,15 +1,15 @@
 class CourseDS {
   String name;
   int confidence;
-  int units;
+  String units;
 
-  set nameChange(String newName){
+  set courseName(String newName){
     this.name = newName;
   }
   set confidenceChange(int newConfidence){
     this.confidence = newConfidence;
   }
-  set unitsChange(int newUnits){
+  set courseUnits(String newUnits){
     this.units = newUnits;
   }
   CourseDS({this.name, this.confidence, this.units});
