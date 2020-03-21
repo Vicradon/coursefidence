@@ -24,6 +24,20 @@ class Courses extends StatelessWidget {
     );
   }
 
+  List<Widget> courses = [
+    ListTile(title: Text("CSC 201"), trailing: Text("89%")),
+  ];
+
+  List<Widget> generatedCourses() {
+    List<Widget> gen = [];
+
+    for (int i = 0; i < courses.length; i++) {
+      gen.add(courses[i]);
+      gen.add(Divider());
+    }
+    return gen;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,24 +47,7 @@ class Courses extends StatelessWidget {
       body: Container(
         alignment: Alignment.center,
         child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: Text("CSC 201"),
-              trailing: Text("89%"),
-            ),
-            Divider(),
-            ListTile(
-              title: Text("CSC 203"),
-              trailing: Text("59%"),
-              // onTap: _openCourseMenu(context),
-            ),
-            Divider(),
-            ListTile(
-              title: Text("CSC 205"),
-              trailing: Text("63%"),
-            ),
-            Divider(),
-          ],
+          children: generatedCourses(),
         ),
       ),
       floatingActionButton: Fab(),
@@ -130,7 +127,7 @@ class CourseFormState extends State<CourseForm> {
                       onSaved: (String value) {
                         courseData.courseName = value;
                       },
-                      onFieldSubmitted: (v){
+                      onFieldSubmitted: (v) {
                         FocusScope.of(context).requestFocus(focusCourseUnits);
                       },
                     ),
@@ -151,7 +148,7 @@ class CourseFormState extends State<CourseForm> {
                       },
                       focusNode: focusCourseUnits,
                     ),
-                    ConfidenceSlide(),
+                    ConfidenceSlide(course: courseData),
                     SizedBox(height: 30),
                     Builder(
                       builder: (BuildContext context) {
@@ -159,11 +156,7 @@ class CourseFormState extends State<CourseForm> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
-
-                              print(courseData);
-                              
-                              // Scaffold.of(context).showSnackBar(
-                              //     SnackBar(content: Text('Processing Data')));
+                              courses.append(courseData);
                             }
                           },
                           child: Text('Submit'),
@@ -180,8 +173,9 @@ class CourseFormState extends State<CourseForm> {
 }
 
 class ConfidenceSlide extends StatefulWidget {
-  Map courseData;
-  ConfidenceSlide({this.courseData});
+  final CourseDS course;
+
+  ConfidenceSlide({this.course});
   @override
   SlideState createState() => SlideState();
 }
@@ -203,11 +197,12 @@ class SlideState extends State<ConfidenceSlide> {
           max: 100.0,
           divisions: 99,
           label: '$_duelCommandment%',
+          // onChanged: widget.onChangedSlide,
           onChanged: (double newValue) {
+            // widget.onChangedSlide();
             setState(() {
-              print(widget.courseData);
+              widget.course.confidence = newValue.round();
               _duelCommandment = newValue.round();
-
             });
           },
         ),
