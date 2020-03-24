@@ -1,4 +1,4 @@
-name: coursefindence
+name: coursefidence
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   connectivity: ^0.4.5+2
   provider: ^2.0.1
+  dotted_border: ^1.0.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

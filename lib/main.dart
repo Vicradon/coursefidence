@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:coursefindence/pages/auth.dart';
-import 'package:coursefindence/pages/overview.dart';
+// import 'package:coursefidence/pages/auth.dart';
+// import 'package:coursefidence/pages/overview.dart';
+import 'package:coursefidence/pages/paschalChallenge.dart';
 
 void main() {
   runApp(App());
@@ -12,8 +13,9 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // '/': (BuildContext context) => Auth(),
-        '/': (BuildContext context) => Overview(),
-      }
+        '/': (BuildContext context) => GPUI(),
+      },
+      // theme: Theme(data: ThemeData(accentColor: Color(Colors.orange)), child: null),
     );
   }
 }

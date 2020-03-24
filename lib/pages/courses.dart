@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:coursefindence/utils/courseDS.dart';
+import 'package:coursefidence/utils/courseDS.dart';
 
 class Courses extends StatelessWidget {
-  _openCourseMenu(context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          child: ListView(children: <Widget>[
-            ListTile(
-              title: Row(
-                children: <Widget>[Icon(Icons.edit), Text("Edit")],
-              ),
-            ),
-            ListTile(
-              title: Row(
-                children: <Widget>[Icon(Icons.delete), Text("Delete")],
-              ),
-            ),
-          ]),
-        );
-      },
-    );
-  }
+  // _openCourseMenu(context) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Container(
+  //         child: ListView(children: <Widget>[
+  //           ListTile(
+  //             title: Row(
+  //               children: <Widget>[Icon(Icons.edit), Text("Edit")],
+  //             ),
+  //           ),
+  //           ListTile(
+  //             title: Row(
+  //               children: <Widget>[Icon(Icons.delete), Text("Delete")],
+  //             ),
+  //           ),
+  //         ]),
+  //       );
+  //     },
+  //   );
+  // }
 
-  List<Widget> courses = [
+  final List<Widget> courses = [
     ListTile(title: Text("CSC 201"), trailing: Text("89%")),
   ];
 
@@ -50,12 +50,15 @@ class Courses extends StatelessWidget {
           children: generatedCourses(),
         ),
       ),
-      floatingActionButton: Fab(),
+      floatingActionButton: Fab(courses: courses),
     );
   }
 }
 
 class Fab extends StatelessWidget {
+  final List<Widget> courses;
+  Fab({this.courses});
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -63,7 +66,7 @@ class Fab extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           builder: (BuildContext context) {
-            return Container(child: CourseForm());
+            return Container(child: CourseForm(courses: courses));
           },
         );
       },
@@ -73,6 +76,8 @@ class Fab extends StatelessWidget {
 }
 
 class CourseForm extends StatefulWidget {
+  final List<Widget> courses;
+  CourseForm({this.courses});
   @override
   CourseFormState createState() {
     return CourseFormState();
@@ -100,74 +105,76 @@ class CourseFormState extends State<CourseForm> {
     return Form(
       key: _formKey,
       child: Container(
-          height: 400,
-          // clipBehavior: Clip.round,
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-          child: SingleChildScrollView(
-            child: Stack(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Text(
-                      "Add course",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.book),
-                        hintText: 'Course Name',
-                        labelText: 'Name *',
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter the course name';
-                        }
-                        return null;
-                      },
-                      onSaved: (String value) {
-                        courseData.courseName = value;
-                      },
-                      onFieldSubmitted: (v) {
-                        FocusScope.of(context).requestFocus(focusCourseUnits);
-                      },
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.confirmation_number),
-                        hintText: 'Course Units',
-                        labelText: 'Units *',
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter the course unit';
-                        }
-                        return null;
-                      },
-                      onSaved: (String value) {
-                        courseData.courseUnits = value;
-                      },
-                      focusNode: focusCourseUnits,
-                    ),
-                    ConfidenceSlide(course: courseData),
-                    SizedBox(height: 30),
-                    Builder(
-                      builder: (BuildContext context) {
-                        return RaisedButton(
-                          onPressed: () {
-                            if (_formKey.currentState.validate()) {
-                              _formKey.currentState.save();
-                              courses.append(courseData);
-                            }
-                          },
-                          child: Text('Submit'),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ],
+        height: 400,
+        // clipBehavior: Clip.round,
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+        child: Column(
+          children: <Widget>[
+            Text(
+              "Add course",
+              style: TextStyle(fontSize: 25),
             ),
-          )),
+            TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.book),
+                hintText: 'Course Name',
+                labelText: 'Name *',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter the course name';
+                }
+                return null;
+              },
+              onSaved: (String value) {
+                courseData.courseName = value;
+              },
+              onFieldSubmitted: (v) {
+                FocusScope.of(context).requestFocus(focusCourseUnits);
+              },
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.confirmation_number),
+                hintText: 'Course Units',
+                labelText: 'Units *',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter the course unit';
+                }
+                return null;
+              },
+              onSaved: (String value) {
+                courseData.courseUnits = value;
+              },
+              focusNode: focusCourseUnits,
+            ),
+            ConfidenceSlide(course: courseData),
+            SizedBox(height: 30),
+            Builder(
+              builder: (BuildContext context) {
+                return RaisedButton(
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      setState(() {
+                        widget.courses.add(
+                          ListTile(
+                            title: Text("${courseData.name}"),
+                            trailing: Text("${courseData.confidence}%"),
+                          ),
+                        );
+                      });
+                    }
+                  },
+                  child: Text('Submit'),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
