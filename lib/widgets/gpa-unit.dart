@@ -1,14 +1,16 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/Material.dart';
 
 class GPAUnit extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  GlobalKey stickyKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom:20),
+      margin: EdgeInsets.only(bottom: 20),
       child: Row(
         children: <Widget>[
           Container(
@@ -48,6 +50,20 @@ class GPAUnit extends StatelessWidget {
                           ),
                         ),
                       ),
+                      // VerticalDivider(
+                      //   thickness: 1,
+                      //   // height:20,
+                      //   width: 1,
+                      //   color: Colors.red,
+                      // ),
+                      Container(
+                        width: 1,
+                        height: 47,
+                      //   height: double.infinity,
+                        color: Colors.black45,
+                      ),
+                     
+
                       Expanded(
                         child: Center(
                           child: DropdownButtonHideUnderline(

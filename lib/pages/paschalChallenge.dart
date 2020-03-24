@@ -37,7 +37,9 @@ class GPUI extends StatelessWidget {
               ],
             ),
             AddNewCourse(),
-            CalculateButton()
+            CalculateButton(),
+            SizedBox(height: 10,),
+            Divider(thickness: 1, color: Colors.black45,)
           ],
         ),
       ),
