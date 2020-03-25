@@ -5,33 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CourseForm extends StatefulWidget {
-
   @override
   CourseFormState createState() {
     return CourseFormState();
   }
 }
 
-
 class CourseFormState extends State<CourseForm> {
   final _formKey = GlobalKey<FormState>();
-  // final Map<String, dynamic> courseData = {
-  //   "courseName": null,
-  //   "courseUnits": null,
-  //   "confidenceLevel": null
-  // };
 
   final courseData = new CourseDS();
-
-  get theCourseData {
-    return courseData;
-  }
 
   final focusCourseUnits = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    final courseModel = Provider.of<CourseModel>(context, listen: false);
+    // final courseModel = Provider.of<CourseModel>(context, listen: false);
+    final courseModel = Provider.of<CourseModel>(context);
 
     return Form(
       key: _formKey,
@@ -89,7 +79,8 @@ class CourseFormState extends State<CourseForm> {
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
-                        courseModel.courseList.add(courseData);
+                      courseModel.add(courseData);
+                      Navigator.of(context).pop();
                     }
                   },
                   child: Text('Submit'),
