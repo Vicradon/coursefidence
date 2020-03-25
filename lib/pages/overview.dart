@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:coursefindence/pages/courses.dart';
+import 'package:coursefidence/pages/courses.dart';
 
 class Overview extends StatelessWidget {
   final courseTextStyle = TextStyle(fontSize: 18, color: Colors.white);
