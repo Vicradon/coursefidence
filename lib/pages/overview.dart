@@ -1,5 +1,7 @@
+import 'package:coursefidence/utils/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:coursefidence/pages/courses.dart';
+import 'package:provider/provider.dart';
 
 class Overview extends StatelessWidget {
   final courseTextStyle = TextStyle(fontSize: 18, color: Colors.white);
@@ -7,11 +9,13 @@ class Overview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final courseModel = Provider.of<CourseModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Overview"),
       ),
-      drawer: Drawer(
+      drawer: Drawer( 
         child: Column(
           children: <Widget>[
             UserAccountsDrawerHeader(
@@ -50,7 +54,7 @@ class Overview extends StatelessWidget {
                   Text("Overrall Confidence", style: courseTextStyle),
                   SizedBox(height: 20),
                   Text(
-                    "43\%",
+                    "${courseModel.getOverallConfidence}\%",
                     style: confidenceTextStyle,
                   )
                 ],
@@ -62,9 +66,9 @@ class Overview extends StatelessWidget {
               color: Colors.lightBlue,
               child: Column(
                 children: <Widget>[
-                  Text("9 Courses", style: courseTextStyle),
+                  Text("${courseModel.numOfCourses} Courses", style: courseTextStyle),
                   SizedBox(height: 20),
-                  Text("23 Units", style: courseTextStyle)
+                  Text("${courseModel.numOfUnits} Units", style: courseTextStyle)
                 ],
               ),
             ),
