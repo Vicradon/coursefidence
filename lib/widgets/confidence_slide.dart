@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ConfidenceSlide extends StatefulWidget {
   final CourseDS course;
 
-  ConfidenceSlide({this.course});
+  ConfidenceSlide({Key key, this.course}) : super(key: key);
   @override
   SlideState createState() => SlideState();
 }
@@ -21,6 +21,7 @@ class SlideState extends State<ConfidenceSlide> {
           style: TextStyle(fontSize: 15, color: Colors.black54),
         ),
         Slider.adaptive(
+          key: Key('slider'),
           value: _duelCommandment.toDouble(),
           min: 0,
           max: 100.0,
