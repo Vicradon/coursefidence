@@ -1,8 +1,4 @@
-Use a list view for the form
-Cause a UI rebuild when course is submitted
-Notify the user if he tries submitting the form without selecting a confidence level
-
-
+Begin testing the app
+Implement Auth
+Implement sqflite
 Implement the percent indicator
-
-

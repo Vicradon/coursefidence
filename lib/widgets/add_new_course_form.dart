@@ -3,6 +3,7 @@ import 'package:coursefidence/utils/courseDS.dart';
 import 'package:coursefidence/widgets/confidence_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class CourseForm extends StatefulWidget {
   @override
@@ -55,6 +56,8 @@ class CourseFormState extends State<CourseForm> {
               },
             ),
             TextFormField(
+              keyboardType: TextInputType.number,
+              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
               decoration: const InputDecoration(
                 icon: Icon(Icons.confirmation_number),
                 hintText: 'Course Units',

@@ -12,6 +12,6 @@ class CourseDS {
   set courseUnits(String newUnits){
     this.units = newUnits;
   }
-  CourseDS({this.name, this.confidence, this.units});
+  CourseDS({this.name, this.confidence = 0, this.units});
   
 }
