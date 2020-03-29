@@ -20,6 +20,7 @@ class SlideState extends State<ConfidenceSlide> {
           "Confidence level",
           style: TextStyle(fontSize: 15, color: Colors.black54),
         ),
+        Text("$_duelCommandment", key: Key("slider_value"),),
         Slider.adaptive(
           key: Key('slider'),
           value: _duelCommandment.toDouble(),
