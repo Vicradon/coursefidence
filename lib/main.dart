@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:coursefidence/pages/auth.dart';
+import 'package:coursefidence/pages/login_page.dart';
+import 'package:coursefidence/pages/signup_page.dart';
 import 'package:coursefidence/pages/courses.dart';
-// import 'package:coursefidence/pages/overview.dart';
+import 'package:coursefidence/pages/overview.dart';
 import 'package:provider/provider.dart';
 import 'package:coursefidence/utils/course_model.dart';
 
@@ -13,10 +14,11 @@ class App extends StatelessWidget {
     return ChangeNotifierProvider<CourseModel>(
       builder: (context) => CourseModel(),
       child: MaterialApp(
-        initialRoute: '/',
+        initialRoute: '/login',
         routes: {
-          '/': (BuildContext context) => Auth(),
-          // '/': (BuildContext context) => Overview(),
+          '/': (BuildContext context) => Overview(),
+          '/signup': (BuildContext context) => SignupPage(),
+          '/login': (BuildContext context) => LoginPage(),
           '/courses': (BuildContext context) => Courses(),
         },
       ), // theme: Theme(data: ThemeData(accentColor: Color(Colors.orange)), child: null),

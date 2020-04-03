@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "679091782336",
+    "firebase_url": "https://coursefidence.firebaseio.com",
+    "project_id": "coursefidence",
+    "storage_bucket": "coursefidence.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679091782336:android:b6c6e760fd8bc408d7a325",
+        "android_client_info": {
+          "package_name": "com.radon_apps.coursefidence"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679091782336-h224frve01jpu13ajp7jqjd5b4vk762p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.radon_apps.coursefidence",
+            "certificate_hash": "76b81ca8dc0d4d5af12c9dd97a7f4f2a1fa15abc"
+          }
+        },
+        {
+          "client_id": "679091782336-30a1fkhtfvfsnv39tv0fk6nanb665p4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK1PFVTCFino_RLz0QxfXW6ZMJVunVMq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679091782336-30a1fkhtfvfsnv39tv0fk6nanb665p4d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
