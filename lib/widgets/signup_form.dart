@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 
 class SignupForm extends StatefulWidget {
   @override
@@ -10,6 +10,10 @@ class SignupForm extends StatefulWidget {
 
 class SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _success;
+  String _userEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +26,7 @@ class SignupFormState extends State<SignupForm> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                controller: _emailController,
                 decoration: const InputDecoration(
                   icon: Icon(Icons.email),
                   hintText: 'johndoe@xyz.com',
@@ -36,6 +41,7 @@ class SignupFormState extends State<SignupForm> {
                 onSaved: (String value) {},
               ),
               TextFormField(
+                controller: _passwordController,
                 decoration: const InputDecoration(
                   icon: Icon(Icons.lock),
                   hintText: 'some_password',
@@ -55,13 +61,19 @@ class SignupFormState extends State<SignupForm> {
                 builder: (BuildContext context) {
                   return RaisedButton(
                     onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        
-                      }
+                      if (_formKey.currentState.validate()) {}
                     },
                     child: Text('Submit'),
                   );
                 },
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: Text(_success == null
+                    ? ''
+                    : (_success
+                        ? 'Successfully registered ' + _userEmail
+                        : 'Registration failed')),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -74,11 +86,19 @@ class SignupFormState extends State<SignupForm> {
                     child: Text("login"),
                   )
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }
