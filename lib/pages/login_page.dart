@@ -5,12 +5,16 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
       body: Builder(
-        builder: (context) => Center(
-          child: LoginForm(),
+        builder: (context) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Login here",
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            LoginForm()
+          ],
         ),
       ),
     );

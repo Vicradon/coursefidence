@@ -14,6 +14,9 @@ class App extends StatelessWidget {
     return ChangeNotifierProvider<CourseModel>(
       builder: (context) => CourseModel(),
       child: MaterialApp(
+        theme: ThemeData(
+          brightness: Brightness.dark,
+        ),
         initialRoute: '/login',
         routes: {
           '/': (BuildContext context) => Overview(),

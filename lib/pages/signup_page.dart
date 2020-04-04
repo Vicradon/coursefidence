@@ -5,12 +5,16 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign up"),
-      ),
       body: Builder(
-        builder: (context) => Center(
-          child: SignupForm(),
+        builder: (context) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Sign up here",
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            SignupForm(),
+          ],
         ),
       ),
     );
