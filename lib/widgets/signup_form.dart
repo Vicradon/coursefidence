@@ -37,35 +37,6 @@ class SignupFormState extends State<SignupForm> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.person),
-                  hintText: 'e.g. +2348145769245',
-                  labelText: 'Phone Number*',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a valid phone number';
-                  }
-                  return null;
-                },
-                onSaved: (String value) {},
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.person),
-                  hintText: 'e.g. John Doe',
-                  labelText: 'Username*',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a valid username';
-                  }
-                  return null;
-                },
-                onSaved: (String value) {},
-              ),
-              TextFormField(
-                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                decoration: const InputDecoration(
                   icon: Icon(Icons.lock),
                   hintText: 'some_password',
                   labelText: 'Password *',
@@ -85,8 +56,7 @@ class SignupFormState extends State<SignupForm> {
                   return RaisedButton(
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save();
-                        Navigator.of(context).pop();
+                        
                       }
                     },
                     child: Text('Submit'),
