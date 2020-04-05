@@ -1,16 +1,37 @@
-# anapp
+# Coursefidence
 
-A new Flutter project.
+Coursefidence is a flutter app which logs the confidence level of students in their courses. 
+It can be useful to students who don't give equal attention to all courses.
 
-## Getting Started
+## Installation
 
-This project is a starting point for a Flutter application.
+Clone or download the project
 
-A few resources to get you started if this is your first Flutter project:
+### Cloning
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```bash
+git clone https://github.com/vicradon/coursefidence.git
+flutter run
+```
+### Downloading
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Download as zip
+2. Open up the unzipped folder
+3. run `flutter run` in your terminal
+
+OR
+
+1. Download as zip
+2. Copy the content of the lib folder and pubspec.yaml into your existing project
+
+## Usage
+Play around with the code in your fav emulator
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

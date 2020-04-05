@@ -1,7 +1,7 @@
 import 'package:coursefidence/auth_wrapper.dart';
 import 'package:coursefidence/models/course_model.dart';
 import 'package:coursefidence/models/user.dart';
-import 'package:coursefidence/services/auth.dart';
+import 'package:coursefidence/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
