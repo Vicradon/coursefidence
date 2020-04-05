@@ -1,6 +1,6 @@
-import 'package:coursefidence/utils/course_model.dart';
+import 'package:coursefidence/models/course_model.dart';
 import 'package:flutter/material.dart';
-import 'package:coursefidence/pages/courses.dart';
+import 'package:coursefidence/pages/home/courses.dart';
 import 'package:provider/provider.dart';
 
 class Overview extends StatelessWidget {

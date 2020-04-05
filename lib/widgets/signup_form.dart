@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
 class SignupForm extends StatefulWidget {
   @override
   SignupFormState createState() {
@@ -61,7 +65,9 @@ class SignupFormState extends State<SignupForm> {
                 builder: (BuildContext context) {
                   return RaisedButton(
                     onPressed: () {
-                      if (_formKey.currentState.validate()) {}
+                      if (_formKey.currentState.validate()) {
+                        _register();
+                      }
                     },
                     child: Text('Submit'),
                   );
@@ -74,18 +80,6 @@ class SignupFormState extends State<SignupForm> {
                     : (_success
                         ? 'Successfully registered ' + _userEmail
                         : 'Registration failed')),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Already have an account?"),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    child: Text("login"),
-                  )
-                ],
               ),
             ],
           ),
@@ -100,5 +94,27 @@ class SignupFormState extends State<SignupForm> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _register() async {
+    try {
+      dynamic result = await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      final FirebaseUser user = result.user;
+      print(user);
+      print(45);
+      if (user != null) {
+        setState(() {
+          _success = true;
+          _userEmail = user.email;
+        });
+      } else {
+        _success = false;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

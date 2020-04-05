@@ -1,5 +1,5 @@
-import 'package:coursefidence/utils/course_model.dart';
-import 'package:coursefidence/utils/courseDS.dart';
+import 'package:coursefidence/models/course_model.dart';
+import 'package:coursefidence/models/courseDS.dart';
 import 'package:coursefidence/widgets/confidence_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

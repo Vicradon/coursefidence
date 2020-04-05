@@ -1,4 +1,4 @@
-import 'package:coursefidence/utils/courseDS.dart';
+import 'package:coursefidence/models/courseDS.dart';
 import 'package:flutter/foundation.dart';
 
 // This model would contain a list of courseDS objects and info such as the number of courses
