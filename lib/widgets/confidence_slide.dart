@@ -1,4 +1,4 @@
-import 'package:coursefidence/utils/courseDS.dart';
+import 'package:coursefidence/models/courseDS.dart';
 import 'package:flutter/material.dart';
 
 class ConfidenceSlide extends StatefulWidget {

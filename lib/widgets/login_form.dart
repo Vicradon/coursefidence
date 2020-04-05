@@ -70,18 +70,6 @@ class LoginFormState extends State<LoginForm> {
                   );
                 },
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Don't have an account yet?"),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/signup');
-                    },
-                    child: Text("sign up"),
-                  )
-                ],
-              )
             ],
           ),
         ),

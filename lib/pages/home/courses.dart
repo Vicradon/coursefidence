@@ -1,4 +1,4 @@
-import 'package:coursefidence/utils/course_model.dart';
+import 'package:coursefidence/models/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:coursefidence/widgets/add_new_course_form.dart';
 import 'package:provider/provider.dart';
