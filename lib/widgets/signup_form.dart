@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
+import 'package:coursefidence/services/auth_service.dart';
 
 class SignupForm extends StatefulWidget {
   @override
@@ -13,11 +9,13 @@ class SignupForm extends StatefulWidget {
 }
 
 class SignupFormState extends State<SignupForm> {
+  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _success;
-  String _userEmail;
+
+  String error = '';
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -64,22 +62,32 @@ class SignupFormState extends State<SignupForm> {
               Builder(
                 builder: (BuildContext context) {
                   return RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        _register();
+                        setState(() => loading = true);
+                        final result = await _auth.registerWithEmailAndPassword(
+                          _emailController.text,
+                          _passwordController.text,
+                        );
+                        final errorMsg = _auth.signuperrormessage;
+                        if (result == null) {
+                          setState(() {
+                            error = errorMsg;
+                            loading = false;
+                          });
+                        }
                       }
                     },
                     child: Text('Submit'),
                   );
                 },
               ),
-              Container(
-                alignment: Alignment.center,
-                child: Text(_success == null
-                    ? ''
-                    : (_success
-                        ? 'Successfully registered ' + _userEmail
-                        : 'Registration failed')),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
               ),
             ],
           ),
@@ -94,27 +102,5 @@ class SignupFormState extends State<SignupForm> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  void _register() async {
-    try {
-      dynamic result = await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      final FirebaseUser user = result.user;
-      print(user);
-      print(45);
-      if (user != null) {
-        setState(() {
-          _success = true;
-          _userEmail = user.email;
-        });
-      } else {
-        _success = false;
-      }
-    } catch (e) {
-      print(e.toString());
-    }
   }
 }

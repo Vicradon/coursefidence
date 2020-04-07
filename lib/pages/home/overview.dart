@@ -1,6 +1,7 @@
 import 'package:coursefidence/models/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:coursefidence/pages/home/courses.dart';
+import 'package:coursefidence/widgets/drawer_widget.dart';
 import 'package:provider/provider.dart';
 
 class Overview extends StatelessWidget {
@@ -15,32 +16,7 @@ class Overview extends StatelessWidget {
       appBar: AppBar(
         title: Text("Overview"),
       ),
-      drawer: Drawer( 
-        child: Column(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text("User User"),
-              accountEmail: Text("user@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text("User"),
-              ),
-            ),
-            ListTile(
-              title: Text("Overview"),
-              leading: Icon(Icons.remove_red_eye),
-            ),
-            ListTile(
-              title: Text("Courses"),
-              leading: Icon(Icons.book),
-            ),
-            ListTile(
-              title: Text("About"),
-              leading: Icon(Icons.info),
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerWidget(),
       body: Container(
         alignment: Alignment.center,
         child: Column(

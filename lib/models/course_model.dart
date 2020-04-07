@@ -1,13 +1,25 @@
 import 'package:coursefidence/models/courseDS.dart';
+import 'package:coursefidence/services/database_helper.dart';
 import 'package:flutter/foundation.dart';
 
 // This model would contain a list of courseDS objects and info such as the number of courses
 class CourseModel with ChangeNotifier {
   List<CourseDS> courseList = [];
+  final dbHelper = DatabaseHelper.instance;
 
   void add(data) {
     courseList.add(data);
+    _insert();
     notifyListeners();
+  }
+  void _insert() async {
+    // row to insert
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnName : 'Bob',
+      DatabaseHelper.columnAge  : 23
+    };
+    final id = await dbHelper.insert(row);
+    print('inserted row id: $id');
   }
 
   get getOverallConfidence {

@@ -1,6 +1,6 @@
 {
-    "name": "anapp",
-    "short_name": "anapp",
+    "name": "coursefidence",
+    "short_name": "coursefidence",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",
