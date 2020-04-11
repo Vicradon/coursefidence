@@ -1,41 +1,49 @@
 import 'package:coursefidence/models/course_model.dart';
-import 'package:coursefidence/models/courseDS.dart';
 import 'package:coursefidence/widgets/confidence_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
-class CourseForm extends StatefulWidget {
+class EditCourseForm extends StatefulWidget {
+  EditCourseForm({this.course});
+  final course;
   @override
-  CourseFormState createState() {
-    return CourseFormState();
+  EditCourseFormState createState() {
+    return EditCourseFormState();
   }
 }
 
-class CourseFormState extends State<CourseForm> {
+class EditCourseFormState extends State<EditCourseForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final courseData = CourseDS();
-
   final focusCourseUnits = FocusNode();
+  TextEditingController _nameController;
+  TextEditingController _unitsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.course.name);
+    _unitsController = TextEditingController(text: (widget.course.units));
+  }
 
   @override
   Widget build(BuildContext context) {
-    // final courseModel = Provider.of<CourseModel>(context, listen: false);
     final courseModel = Provider.of<CourseModel>(context);
 
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         height: MediaQuery.of(context).size.height * 0.65,
+        padding: EdgeInsets.fromLTRB(40, 20, 40, 20),
         child: ListView(
           children: <Widget>[
             Text(
-              "Add courses",
+              "Edit course",
               style: TextStyle(fontSize: 25),
             ),
             TextFormField(
+              controller: _nameController,
               decoration: InputDecoration(
                 icon: Icon(Icons.book),
                 hintText: 'Course Name',
@@ -47,14 +55,15 @@ class CourseFormState extends State<CourseForm> {
                 }
                 return null;
               },
-              onSaved: (String value) {
-                courseData.courseName = value;
-              },
+              // onSaved: (String value) {
+              //   courseData.courseName = value;
+              // },
               onFieldSubmitted: (v) {
                 FocusScope.of(context).requestFocus(focusCourseUnits);
               },
             ),
             TextFormField(
+              controller: _unitsController,
               keyboardType: TextInputType.number,
               inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
@@ -68,27 +77,24 @@ class CourseFormState extends State<CourseForm> {
                 }
                 return null;
               },
-              onSaved: (String value) {
-                courseData.courseUnits = value;
-              },
+              // onSaved: (String value) {
+              //   courseData.courseUnits = value;
+              // },
               focusNode: focusCourseUnits,
             ),
             SizedBox(height: 30),
-            ConfidenceSlide(course: courseData),
+            ConfidenceSlide(course: widget.course),
             SizedBox(height: 30),
-            Builder(
-              builder: (BuildContext context) {
-                return RaisedButton(
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      courseModel.add(courseData);
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  child: Text('Submit'),
-                );
+            RaisedButton(
+              color: Theme.of(context).primaryColor,
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  courseModel.update(widget.course.id, _nameController.text,
+                      widget.course.confidence, _unitsController.text);
+                  Navigator.of(context).pop();
+                }
               },
+              child: Text('Update'),
             ),
           ],
         ),

@@ -71,7 +71,8 @@ class DatabaseHelper {
   Future<int> queryRowCount() async {
     Database db = await instance.database;
     return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $table'));
+      await db.rawQuery('SELECT COUNT(*) FROM $table'),
+    );
   }
 
   // We are assuming here that the id column in the map is set. The other

@@ -12,11 +12,30 @@ class CourseModel with ChangeNotifier {
     _insert();
     notifyListeners();
   }
+
+  void delete(id) {
+    courseList.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
+
+  CourseDS edit(id) {
+    return courseList.firstWhere((element) => element.id == id);
+  }
+
+  void update(id, name, confidence, units) {
+    final item = courseList.firstWhere((element) => element.id == id);
+    final index = courseList.indexOf(item);
+    var course = CourseDS(name: name, units: units, confidence: confidence);
+    course.id = id;
+    courseList[index] = course;
+    notifyListeners();
+  }
+
   void _insert() async {
     // row to insert
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName : 'Bob',
-      DatabaseHelper.columnAge  : 23
+      DatabaseHelper.columnName: 'Bob',
+      DatabaseHelper.columnAge: 23
     };
     final id = await dbHelper.insert(row);
     print('inserted row id: $id');

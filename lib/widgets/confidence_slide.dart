@@ -10,15 +10,23 @@ class ConfidenceSlide extends StatefulWidget {
 }
 
 class SlideState extends State<ConfidenceSlide> {
-  var _duelCommandment = 0;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    var _duelCommandment = widget.course.confidence;
+
+    return Column(
       mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          "Confidence level",
-          style: TextStyle(fontSize: 15, color: Colors.black54),
+        Container(
+          child: Text(
+            "Confidence level",
+            style: TextStyle(fontSize: 15, color: Colors.black54),
+          ),
+          padding: EdgeInsets.symmetric(
+            vertical: 0,
+            horizontal: 40,
+          ),
         ),
         Slider.adaptive(
           value: _duelCommandment.toDouble(),
