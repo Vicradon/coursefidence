@@ -1,9 +1,0 @@
-Add crud operations to courses
-
-Implement sqflite
-  Whenever data changes in the store, update the SQL data.
-    Learn how CRUD operations are carried out
-    Immplement CRUD logic on the course data
-Implement the percent indicator
-
-Refactor the design of the app
